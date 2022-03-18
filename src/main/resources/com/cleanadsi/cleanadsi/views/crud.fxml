@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Button?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="462.0" prefWidth="655.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.cleanadsi.cleanadsi.controllers.UsuarioController">
+   <children>
+      <BorderPane layoutX="15.0" layoutY="14.0" prefHeight="437.0" prefWidth="626.0">
+         <center>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="437.0" prefWidth="651.0" BorderPane.alignment="CENTER">
+               <children>
+                  <ScrollPane prefHeight="431.0" prefWidth="604.0">
+                     <content>
+                        <TableView fx:id="tableViewUsuarios" prefHeight="429.0" prefWidth="602.0">
+                          <columns>
+                            <TableColumn fx:id="tcIDUsuario" prefWidth="75.0" text="id_usuario" />
+                            <TableColumn fx:id="tcIDPersona" prefWidth="75.0" text="id_persona" />
+                              <TableColumn fx:id="tcEmail" prefWidth="75.0" text="email" />
+                              <TableColumn fx:id="tcEmailVerifiedAt" prefWidth="75.0" text="email_verified_at" />
+                              <TableColumn fx:id="tcPassword" prefWidth="75.0" text="password" />
+                              <TableColumn fx:id="tcRememberToken" prefWidth="75.0" text="remember_token" />
+                              <TableColumn fx:id="tcCreatedAt" prefWidth="75.0" text="created_at" />
+                              <TableColumn fx:id="tcUpdatedAt" prefWidth="75.0" text="updated_at" />
+                          </columns>
+                        </TableView>
+                     </content>
+                  </ScrollPane>
+               </children>
+            </AnchorPane>
+         </center>
+      </BorderPane>
+   </children>
+</AnchorPane>
