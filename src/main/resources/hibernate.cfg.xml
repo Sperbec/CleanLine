@@ -4,11 +4,21 @@
     "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
   <session-factory>
+
+    <!--
     <property name="hibernate.connection.dialect">MySQLDialect</property>
     <property name="hibernate.connection.driver_class">com.mysql.cj.jdbc.Driver</property>
     <property name="hibernate.connection.url">jdbc:mysql://34.95.206.133:3306/cleanadsi_adsi192</property>
     <property name="hibernate.connection.username">cleanadsi_permanente</property>
     <property name="hibernate.connection.password">Permanente2022</property>
+    <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+    -->
+
+    <property name="hibernate.connection.dialect">MySQLDialect</property>
+    <property name="hibernate.connection.driver_class">com.mysql.cj.jdbc.Driver</property>
+    <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/cleanadsi_adsi192</property>
+    <property name="hibernate.connection.username">root</property>
+    <property name="hibernate.connection.password">1234</property>
     <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
 
     <mapping class="com.cleanadsi.cleanadsi.models.ProductoEntity"/>

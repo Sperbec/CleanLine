@@ -8,6 +8,5 @@ public interface IUsuarioDao<T> {
     int addData(T data);
     int deleteData(T data);
     int updateData(T data);
-    UsuarioEntity getData(Long data);
     List<T> getAll();
 }
