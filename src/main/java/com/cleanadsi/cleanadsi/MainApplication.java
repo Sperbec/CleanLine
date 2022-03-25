@@ -2,6 +2,7 @@ package com.cleanadsi.cleanadsi;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
@@ -12,9 +13,10 @@ public class MainApplication extends Application {
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoaderCRUD = new FXMLLoader(MainApplication.class.getResource("views/crud.fxml"));
 
-        Scene crud_scene = new Scene(fxmlLoaderCRUD.load(), 700, 700);
+        Scene crud_scene = new Scene(fxmlLoaderCRUD.load(), 640, 480);
         stage.setTitle("CleanLine");
         stage.setScene(crud_scene);
+
 
         stage.show();
     }

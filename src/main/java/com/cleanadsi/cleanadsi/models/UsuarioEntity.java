@@ -1,5 +1,7 @@
 package com.cleanadsi.cleanadsi.models;
 
+import org.hibernate.annotations.Check;
+
 import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.Objects;

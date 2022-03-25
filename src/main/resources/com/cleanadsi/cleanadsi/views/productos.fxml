@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+
+
+<AnchorPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.cleanadsi.cleanadsi.controllers.ProductoController">
+   <children>
+       <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+           <left>
+               <VBox alignment="TOP_CENTER" prefHeight="483.0" prefWidth="210.0" BorderPane.alignment="CENTER">
+                   <children>
+                       <HBox alignment="CENTER_LEFT" prefHeight="43.0" prefWidth="210.0">
+                           <children>
+                               <Label text="Producto">
+                                   <font>
+                                       <Font size="16.0" />
+                                   </font>
+                                   <HBox.margin>
+                                       <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                   </HBox.margin>
+                               </Label>
+                               <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                                   <image>
+                                       <Image url="@../../../../images/icons/producto.png" />
+                                   </image>
+                                   <HBox.margin>
+                                       <Insets bottom="5.0" left="15.0" right="5.0" top="5.0" />
+                                   </HBox.margin>
+                               </ImageView>
+                           </children>
+                       </HBox>
+                       <TextField fx:id="textFieldIDProducto" promptText="id producto">
+                           <VBox.margin>
+                               <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </VBox.margin>
+                       </TextField>
+                       <TextField fx:id="textFieldNombre" promptText="nombre">
+                           <VBox.margin>
+                               <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </VBox.margin>
+                       </TextField>
+                       <TextField fx:id="textFieldDescripcion" promptText="descripción">
+                           <VBox.margin>
+                               <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </VBox.margin>
+                       </TextField>
+                       <TextField fx:id="textFieldSKU" promptText="sku">
+                           <VBox.margin>
+                               <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </VBox.margin>
+                       </TextField>
+                       <TextField fx:id="textFieldPrecio" promptText="precio">
+                           <VBox.margin>
+                               <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </VBox.margin>
+                       </TextField>
+                       <TextField fx:id="textFieldCantidadExistencia" layoutX="15.0" layoutY="198.0" promptText="cantidad en existencia">
+                           <VBox.margin>
+                               <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </VBox.margin>
+                       </TextField>
+                       <TextField fx:id="textFieldFilePath" layoutX="15.0" layoutY="233.0" promptText="ruta">
+                           <VBox.margin>
+                               <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </VBox.margin>
+                       </TextField>
+                       <TextField fx:id="textFieldImagen" layoutX="15.0" layoutY="267.0" promptText="imagen">
+                           <VBox.margin>
+                               <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </VBox.margin>
+                       </TextField>
+                       <TextField fx:id="textFieldIDCategoria" layoutX="15.0" layoutY="302.0" promptText="id categoria">
+                           <VBox.margin>
+                               <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </VBox.margin>
+                       </TextField>
+                       <DatePicker fx:id="datePickerDeletedAt" prefHeight="25.0" prefWidth="481.0" promptText="borrado el">
+                           <cursor>
+                               <Cursor fx:constant="HAND" />
+                           </cursor>
+                           <VBox.margin>
+                               <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </VBox.margin>
+                       </DatePicker>
+                       <DatePicker fx:id="datePickerCreatedAt" prefHeight="25.0" prefWidth="215.0" promptText="creado el">
+                           <cursor>
+                               <Cursor fx:constant="HAND" />
+                           </cursor>
+                           <VBox.margin>
+                               <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </VBox.margin>
+                       </DatePicker>
+                       <DatePicker fx:id="datePickerUpdatedAt" prefHeight="25.0" prefWidth="211.0" promptText="actualizado el">
+                           <cursor>
+                               <Cursor fx:constant="HAND" />
+                           </cursor>
+                           <VBox.margin>
+                               <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </VBox.margin>
+                       </DatePicker>
+                       <CheckBox fx:id="checkBoxEstado" alignment="CENTER" contentDisplay="RIGHT" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" text="Estado" />
+                       <HBox alignment="CENTER" prefHeight="52.0" prefWidth="725.0">
+                           <children>
+                               <Button fx:id="buttonInsertar" mnemonicParsing="false" onAction="#addDataAE" text="Insertar">
+                                   <cursor>
+                                       <Cursor fx:constant="HAND" />
+                                   </cursor>
+                                   <HBox.margin>
+                                       <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                                   </HBox.margin>
+                               </Button>
+                               <Button fx:id="buttonEliminar" mnemonicParsing="false" onAction="#deleteDataAE" text="Eliminar">
+                                   <cursor>
+                                       <Cursor fx:constant="HAND" />
+                                   </cursor>
+                                   <HBox.margin>
+                                       <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                                   </HBox.margin>
+                               </Button>
+                               <Button fx:id="buttonActualizar" mnemonicParsing="false" onAction="#updateDataAE" text="Actualizar">
+                                   <cursor>
+                                       <Cursor fx:constant="HAND" />
+                                   </cursor>
+                                   <HBox.margin>
+                                       <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+                                   </HBox.margin>
+                               </Button>
+                           </children>
+                       </HBox>
+                   </children>
+                   <opaqueInsets>
+                       <Insets />
+                   </opaqueInsets>
+                   <BorderPane.margin>
+                       <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                   </BorderPane.margin>
+               </VBox>
+           </left>
+         <center>
+               <ScrollPane prefHeight="518.0" prefWidth="522.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <content>
+                       <TableView fx:id="tableViewProductos" prefHeight="900.0" prefWidth="1200.0" tableMenuButtonVisible="true">
+                           <columnResizePolicy>
+                               <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                           </columnResizePolicy>
+                           <columns>
+                               <TableColumn fx:id="tcIDProducto" prefWidth="75.0" text="id_producto" />
+                               <TableColumn fx:id="tcNombre" prefWidth="75.0" text="nombre" />
+                               <TableColumn fx:id="tcDescripcion" prefWidth="75.0" text="descripción" />
+                               <TableColumn fx:id="tcSKU" prefWidth="75.0" text="sku" />
+                               <TableColumn fx:id="tcPrecio" prefWidth="75.0" text="precio" />
+                               <TableColumn fx:id="tcCantidadExistencia" prefWidth="75.0" text="cantidad_existencia" />
+                               <TableColumn fx:id="tcFilePath" prefWidth="75.0" text="file_path" />
+                               <TableColumn fx:id="tcImagen" prefWidth="75.0" text="imagen" />
+                               <TableColumn fx:id="tcIDCategoria" prefWidth="75.0" text="id_categoria" />
+                               <TableColumn fx:id="tcDeletedAt" prefWidth="75.0" text="deleted_at" />
+                               <TableColumn fx:id="tcCreatedAt" prefWidth="75.0" text="created_at" />
+                               <TableColumn fx:id="tcUpdatedAt" prefWidth="75.0" text="updated_at" />
+                               <TableColumn fx:id="tcEstado" prefWidth="75.0" text="estado" />
+                           </columns>
+                       </TableView>
+               </content>
+               <padding>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </padding>
+               </ScrollPane>
+         </center>
+       </BorderPane>
+   </children>
+</AnchorPane>

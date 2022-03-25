@@ -1,6 +1,6 @@
 package com.cleanadsi.cleanadsi.dao;
 
-import com.cleanadsi.cleanadsi.models.UsuarioEntity;
+import com.cleanadsi.cleanadsi.models.ProductoEntity;
 import com.cleanadsi.cleanadsi.utility.HibernateUtil;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -11,9 +11,9 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import java.util.List;
 
-public class UsuarioDao implements IUsuarioDao<UsuarioEntity>{
+public class ProductoDao implements IUsuarioDao<ProductoEntity>{
     @Override
-    public int addData(UsuarioEntity data) {
+    public int addData(ProductoEntity data) {
         Session s = HibernateUtil.getSession();
         Transaction t = s.beginTransaction();
         s.save(data);
@@ -24,7 +24,7 @@ public class UsuarioDao implements IUsuarioDao<UsuarioEntity>{
     }
 
     @Override
-    public int deleteData(UsuarioEntity data) {
+    public int deleteData(ProductoEntity data) {
         Session s = HibernateUtil.getSession();
         Transaction t = s.beginTransaction();
         s.delete(data);
@@ -35,7 +35,7 @@ public class UsuarioDao implements IUsuarioDao<UsuarioEntity>{
     }
 
     @Override
-    public int updateData(UsuarioEntity data) {
+    public int updateData(ProductoEntity data) {
         Session s = HibernateUtil.getSession();
         Transaction t = s.beginTransaction();
         s.update(data);
@@ -46,15 +46,15 @@ public class UsuarioDao implements IUsuarioDao<UsuarioEntity>{
     }
 
     @Override
-    public ObservableList<UsuarioEntity> getAll() {
+    public ObservableList<ProductoEntity> getAll() {
         Session s = HibernateUtil.getSession();
         CriteriaBuilder criteriaBuilder = s.getCriteriaBuilder();
-        CriteriaQuery criteriaQuery = criteriaBuilder.createQuery(UsuarioEntity.class);
-        criteriaQuery.from(UsuarioEntity.class);
+        CriteriaQuery criteriaQuery = criteriaBuilder.createQuery(ProductoEntity.class);
+        criteriaQuery.from(ProductoEntity.class);
 
-        List<UsuarioEntity> usuariosList = s.createQuery(criteriaQuery).getResultList();
+        List<ProductoEntity> productosList = s.createQuery(criteriaQuery).getResultList();
         s.close();
 
-        return FXCollections.observableArrayList(usuariosList);
+        return FXCollections.observableArrayList(productosList);
     }
 }
