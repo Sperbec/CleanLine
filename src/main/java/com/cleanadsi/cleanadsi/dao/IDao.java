@@ -2,7 +2,7 @@ package com.cleanadsi.cleanadsi.dao;
 
 import java.util.List;
 
-public interface IProductoDao<T> {
+public interface IDao<T> {
     int addData(T data);
     int deleteData(T data);
     int updateData(T data);

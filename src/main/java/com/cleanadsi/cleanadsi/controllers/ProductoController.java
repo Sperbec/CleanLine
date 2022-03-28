@@ -1,9 +1,7 @@
 package com.cleanadsi.cleanadsi.controllers;
 
 import com.cleanadsi.cleanadsi.dao.ProductoDao;
-import com.cleanadsi.cleanadsi.dao.UsuarioDao;
 import com.cleanadsi.cleanadsi.models.ProductoEntity;
-import com.cleanadsi.cleanadsi.models.UsuarioEntity;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -16,6 +14,7 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Optional;
 
 public class ProductoController {
     // Table view fields
@@ -115,7 +114,9 @@ public class ProductoController {
                     datePickerUpdatedAt.setValue(LocalDate.parse(simpleDateFormat.format(productoEntity.getCreatedAt()), DateTimeFormatter.ofPattern("dd/MM/yyy")));
                 }
 
-                checkBoxEstado.setSelected(Boolean.parseBoolean(String.valueOf(productoEntity.getEstado())));
+                // Convert byte to boolean
+                boolean b = productoEntity.getEstado() != 0;
+                checkBoxEstado.setSelected(b);
             }
         });
 
@@ -153,12 +154,22 @@ public class ProductoController {
         productoEntity.setDescripcion(textFieldDescripcion.getText());
         productoEntity.setSku(textFieldSKU.getText());
         productoEntity.setPrecio(Double.parseDouble(textFieldPrecio.getText()));
+        productoEntity.setCantidadExistencia(Integer.parseInt(textFieldCantidadExistencia.getText()));
         productoEntity.setFilePath(textFieldFilePath.getText());
         productoEntity.setImagen(textFieldImagen.getText());
-        productoEntity.setDeletedAt(Timestamp.valueOf(datePickerDeletedAt.getValue().toString() + " " + LocalTime.now().toString()));
-        productoEntity.setCreatedAt(Timestamp.valueOf(datePickerCreatedAt.getValue().toString() + " " + LocalTime.now().toString()));
-        productoEntity.setUpdatedAt(Timestamp.valueOf(datePickerUpdatedAt.getValue().toString() + " " + LocalTime.now().toString()));
-        productoEntity.setEstado(Byte.parseByte(String.valueOf(checkBoxEstado.isSelected())));
+        productoEntity.setIdCategoria(Integer.parseInt(textFieldIDCategoria.getText()));
+        if (datePickerDeletedAt.getValue() != null) {
+            productoEntity.setDeletedAt(Timestamp.valueOf(datePickerDeletedAt.getValue().toString() + " " + LocalTime.now().toString()));
+        }
+        if (datePickerCreatedAt.getValue() != null) {
+            productoEntity.setCreatedAt(Timestamp.valueOf(datePickerCreatedAt.getValue().toString() + " " + LocalTime.now().toString()));
+        }
+        if (datePickerUpdatedAt.getValue() != null) {
+            productoEntity.setUpdatedAt(Timestamp.valueOf(datePickerUpdatedAt.getValue().toString() + " " + LocalTime.now().toString()));
+        }
+
+        int i = checkBoxEstado.isSelected() ? 1 : 0;
+        productoEntity.setEstado((byte) i);
     }
 
     private void cleanTextFields() {
@@ -169,18 +180,58 @@ public class ProductoController {
         textFieldPrecio.setText(null);
         textFieldFilePath.setText(null);
         textFieldImagen.setText(null);
+        textFieldIDCategoria.setText(null);
         datePickerDeletedAt.setValue(null);
         datePickerCreatedAt.setValue(null);
         datePickerUpdatedAt.setValue(null);
-        checkBoxEstado.setIndeterminate(true);
+        checkBoxEstado.setSelected(false);
     }
 
     public void addDataAE(ActionEvent event) {
+        ProductoDao productoDao = new ProductoDao();
+        ProductoEntity productoEntity = new ProductoEntity();
+
+        setFields(productoEntity);
+
+        productoDao.addData(productoEntity);
+
+        refreshView();
     }
 
     public void deleteDataAE(ActionEvent event) {
+        ProductoEntity productoEntity = (ProductoEntity) tableViewProductos.getSelectionModel().getSelectedItem();
+
+        /*-------------------------------
+         *  Pop up an alert confirmation
+         *-------------------------------*/
+
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setHeaderText(null);
+        alert.setTitle("Confirmar Eliminación");
+        alert.setContentText("¿Está seguro que desea eliminar este producto?" +
+                "\nID: " + productoEntity.getIdProducto() +
+                "\nNombre: " + productoEntity.getNombre());
+
+        Optional<ButtonType> optionalButtonType = alert.showAndWait();
+
+        if (optionalButtonType.get() == ButtonType.OK) {
+            ProductoDao productoDao = new ProductoDao();
+
+            // get all fields on the selected item and assign in ProductoEntity
+            productoDao.deleteData(productoEntity);
+
+            refreshView();
+        }
     }
 
     public void updateDataAE(ActionEvent event) {
+        ProductoDao productoDao = new ProductoDao();
+        ProductoEntity productoEntity = (ProductoEntity) tableViewProductos.getSelectionModel().getSelectedItem();
+
+        setFields(productoEntity);
+
+        productoDao.updateData(productoEntity);
+
+        refreshView();
     }
 }

@@ -11,7 +11,7 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import java.util.List;
 
-public class ProductoDao implements IUsuarioDao<ProductoEntity>{
+public class ProductoDao implements IDao<ProductoEntity> {
     @Override
     public int addData(ProductoEntity data) {
         Session s = HibernateUtil.getSession();

@@ -119,11 +119,17 @@ public class UsuarioController {
     private void setFields(UsuarioEntity usuarioEntity) {
         usuarioEntity.setIdPersona(Integer.parseInt(textFieldIDPersona.getText()));
         usuarioEntity.setEmail(textFieldEmail.getText());
-        usuarioEntity.setEmailVerifiedAt(Timestamp.valueOf(datePickerEmailVerifiedAt.getValue().toString() + " " + LocalTime.now().toString()));
+        if (datePickerEmailVerifiedAt.getValue() != null) {
+            usuarioEntity.setEmailVerifiedAt(Timestamp.valueOf(datePickerEmailVerifiedAt.getValue().toString() + " " + LocalTime.now().toString()));
+        }
         usuarioEntity.setPassword(textFieldPassword.getText());
         usuarioEntity.setRememberToken(textFieldRememberToken.getText());
-        usuarioEntity.setCreatedAt(Timestamp.valueOf(datePickerCreatedAt.getValue().toString() + " " + LocalTime.now().toString()));
-        usuarioEntity.setUpdatedAt(Timestamp.valueOf(datePickerUpdatedAt.getValue().toString() + " " + LocalTime.now().toString()));
+        if (datePickerCreatedAt.getValue() != null) {
+            usuarioEntity.setCreatedAt(Timestamp.valueOf(datePickerCreatedAt.getValue().toString() + " " + LocalTime.now().toString()));
+        }
+        if (datePickerUpdatedAt.getValue() != null) {
+            usuarioEntity.setUpdatedAt(Timestamp.valueOf(datePickerUpdatedAt.getValue().toString() + " " + LocalTime.now().toString()));
+        }
     }
 
     public void cleanTextFields() {

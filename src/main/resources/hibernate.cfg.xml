@@ -20,11 +20,12 @@
     <property name="hibernate.connection.username">root</property>
     <property name="hibernate.connection.password">1234</property>
     <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+    <property name="hibernate.hbm2ddl.auto">update</property>
 
-    <mapping class="com.cleanadsi.cleanadsi.models.ProductoEntity"/>
     <mapping class="com.cleanadsi.cleanadsi.models.UsuarioEntity"/>
+    <mapping class="com.cleanadsi.cleanadsi.models.ProductoEntity"/>
 
-      <!-- DB schema will be updated if needed -->
-    <!-- <property name="hibernate.hbm2ddl.auto">update</property> -->
+    <!-- DB schema will be updated if needed -->
+    <!--  -->
   </session-factory>
 </hibernate-configuration>
