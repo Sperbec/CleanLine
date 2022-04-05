@@ -9,6 +9,10 @@ module com.cleanadsi.cleanadsi {
 
     requires com.dlsc.formsfx;
     requires org.kordamp.ikonli.javafx;
+    requires org.kordamp.ikonli.core;
+    requires org.kordamp.ikonli.fontawesome;
+    requires org.kordamp.ikonli.bootstrapicons; // delete later
+    requires org.kordamp.bootstrapfx.core;
     requires java.persistence;
     requires java.sql;
     requires org.hibernate.orm.core;
@@ -16,10 +20,10 @@ module com.cleanadsi.cleanadsi {
     // module required for "java: cannot access javax.naming.Referenceable" error
     requires java.naming;
 
-    opens com.cleanadsi.cleanadsi to javafx.fxml;
-    exports com.cleanadsi.cleanadsi;
-    opens com.cleanadsi.cleanadsi.models to javafx.fxml, org.hibernate.orm.core;
-    exports com.cleanadsi.cleanadsi.models;
-    opens com.cleanadsi.cleanadsi.controllers to javafx.fxml;
-    exports com.cleanadsi.cleanadsi.controllers;
+    opens com.cleanline.cleanlinedesktop to javafx.fxml;
+    exports com.cleanline.cleanlinedesktop;
+    opens com.cleanline.cleanlinedesktop.models to javafx.fxml, org.hibernate.orm.core;
+    exports com.cleanline.cleanlinedesktop.models;
+    opens com.cleanline.cleanlinedesktop.controllers to javafx.fxml;
+    exports com.cleanline.cleanlinedesktop.controllers;
 }

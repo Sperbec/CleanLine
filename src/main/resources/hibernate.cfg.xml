@@ -22,10 +22,11 @@
     <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
     <property name="hibernate.hbm2ddl.auto">update</property>
 
-    <mapping class="com.cleanadsi.cleanadsi.models.UsuarioEntity"/>
-    <mapping class="com.cleanadsi.cleanadsi.models.ProductoEntity"/>
+    <mapping class="com.cleanline.cleanlinedesktop.models.UsuarioEntity"/>
+    <mapping class="com.cleanline.cleanlinedesktop.models.ProductoEntity"/>
+    <mapping class="com.cleanline.cleanlinedesktop.models.PersonaEntity"/>
 
-    <!-- DB schema will be updated if needed -->
+      <!-- DB schema will be updated if needed -->
     <!--  -->
   </session-factory>
 </hibernate-configuration>
