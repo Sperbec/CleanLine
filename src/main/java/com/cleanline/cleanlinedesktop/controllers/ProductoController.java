@@ -1,5 +1,6 @@
 package com.cleanline.cleanlinedesktop.controllers;
 
+import com.cleanline.cleanlinedesktop.MainApplication;
 import com.cleanline.cleanlinedesktop.dao.ProductoDao;
 import com.cleanline.cleanlinedesktop.models.ProductoEntity;
 import javafx.collections.ObservableList;
@@ -8,12 +9,13 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyCode;
+import javafx.stage.DirectoryChooser;
+import javafx.stage.FileChooser;
 
+import java.io.File;
+import java.io.IOException;
 import java.sql.Timestamp;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
+import java.time.LocalDateTime;
 import java.util.Optional;
 
 public class ProductoController {
@@ -71,13 +73,9 @@ public class ProductoController {
     @FXML
     public TextField textFieldIDCategoria;
     @FXML
-    public DatePicker datePickerDeletedAt;
-    @FXML
-    public DatePicker datePickerCreatedAt;
-    @FXML
-    public DatePicker datePickerUpdatedAt;
-    @FXML
     public CheckBox checkBoxEstado;
+
+    @FXML
 
     public void initialize(){
         ProductoDao productoDao = new ProductoDao();
@@ -88,11 +86,9 @@ public class ProductoController {
         tableViewProductos.setOnKeyPressed(keyEvent -> {
             if (keyEvent.getCode() == KeyCode.ENTER) {
                 cleanTextFields();
-                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
 
                 ProductoEntity productoEntity = (ProductoEntity) tableViewProductos.getSelectionModel().getSelectedItem();
 
-                textFieldIDProducto.setText(String.valueOf(productoEntity.getIdProducto()));
                 textFieldNombre.setText(String.valueOf(productoEntity.getNombre()));
                 textFieldDescripcion.setText((productoEntity.getDescripcion()));
                 textFieldSKU.setText(productoEntity.getSku());
@@ -101,18 +97,6 @@ public class ProductoController {
                 textFieldFilePath.setText(productoEntity.getFilePath());
                 textFieldImagen.setText(productoEntity.getImagen());
                 textFieldIDCategoria.setText(String.valueOf(productoEntity.getIdCategoria()));
-
-                if (productoEntity.getDeletedAt() != null) {
-                    datePickerDeletedAt.setValue(LocalDate.parse(simpleDateFormat.format(productoEntity.getDeletedAt()), DateTimeFormatter.ofPattern("dd/MM/yyy")));
-                }
-
-                if (productoEntity.getCreatedAt() != null) {
-                    datePickerCreatedAt.setValue(LocalDate.parse(simpleDateFormat.format(productoEntity.getCreatedAt()), DateTimeFormatter.ofPattern("dd/MM/yyy")));
-                }
-
-                if (productoEntity.getUpdatedAt() != null) {
-                    datePickerUpdatedAt.setValue(LocalDate.parse(simpleDateFormat.format(productoEntity.getCreatedAt()), DateTimeFormatter.ofPattern("dd/MM/yyy")));
-                }
 
                 // Convert byte to boolean
                 boolean b = productoEntity.getEstado() != 0;
@@ -142,6 +126,28 @@ public class ProductoController {
         tcEstado.setCellValueFactory(new PropertyValueFactory<ProductoEntity, Byte>("estado"));
     }
 
+    public void setFilePathAE(ActionEvent event) {
+        DirectoryChooser directoryChooser = new DirectoryChooser();
+        directoryChooser.setInitialDirectory(new File("src/main/resources/images"));
+
+        File selectedDirectory = directoryChooser.showDialog(MainApplication.getCrudStage());
+        textFieldFilePath.setText(String.valueOf(selectedDirectory));
+    }
+
+    public void setImagenAE(ActionEvent event) throws IOException {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setInitialDirectory(new File("src/main/resources/images"));
+
+        File selectedFile = fileChooser.showOpenDialog(MainApplication.getCrudStage());
+        textFieldImagen.setText(String.valueOf(selectedFile));
+    }
+
+    /*----------------------
+     *
+     *  GUI Methods
+     *
+     * ----------------------*/
+
     public void refreshView() {
         ProductoDao productoDao = new ProductoDao();
         productosList = productoDao.getAll();
@@ -151,29 +157,25 @@ public class ProductoController {
 
     private void setFields(ProductoEntity productoEntity) {
         productoEntity.setNombre(textFieldNombre.getText());
-        productoEntity.setDescripcion(textFieldDescripcion.getText());
+        if (textFieldDescripcion.getText() != null) {
+            productoEntity.setDescripcion(textFieldDescripcion.getText());
+        }
         productoEntity.setSku(textFieldSKU.getText());
         productoEntity.setPrecio(Double.parseDouble(textFieldPrecio.getText()));
         productoEntity.setCantidadExistencia(Integer.parseInt(textFieldCantidadExistencia.getText()));
-        productoEntity.setFilePath(textFieldFilePath.getText());
-        productoEntity.setImagen(textFieldImagen.getText());
+        if (textFieldFilePath.getText() != null) {
+            productoEntity.setFilePath(textFieldFilePath.getText());
+        }
+        if (textFieldImagen.getText() != null) {
+            productoEntity.setImagen(textFieldImagen.getText());
+        }
         productoEntity.setIdCategoria(Integer.parseInt(textFieldIDCategoria.getText()));
-        if (datePickerDeletedAt.getValue() != null) {
-            productoEntity.setDeletedAt(Timestamp.valueOf(datePickerDeletedAt.getValue().toString() + " " + LocalTime.now().toString()));
-        }
-        if (datePickerCreatedAt.getValue() != null) {
-            productoEntity.setCreatedAt(Timestamp.valueOf(datePickerCreatedAt.getValue().toString() + " " + LocalTime.now().toString()));
-        }
-        if (datePickerUpdatedAt.getValue() != null) {
-            productoEntity.setUpdatedAt(Timestamp.valueOf(datePickerUpdatedAt.getValue().toString() + " " + LocalTime.now().toString()));
-        }
 
         int i = checkBoxEstado.isSelected() ? 1 : 0;
         productoEntity.setEstado((byte) i);
     }
 
     private void cleanTextFields() {
-        textFieldIDProducto.setText(null);
         textFieldNombre.setText(null);
         textFieldDescripcion.setText(null);
         textFieldSKU.setText(null);
@@ -182,17 +184,21 @@ public class ProductoController {
         textFieldFilePath.setText(null);
         textFieldImagen.setText(null);
         textFieldIDCategoria.setText(null);
-        datePickerDeletedAt.setValue(null);
-        datePickerCreatedAt.setValue(null);
-        datePickerUpdatedAt.setValue(null);
         checkBoxEstado.setSelected(false);
     }
+
+    /*----------------------
+     *
+     *  CRUD Methods
+     *
+     * ----------------------*/
 
     public void addDataAE(ActionEvent event) {
         ProductoDao productoDao = new ProductoDao();
         ProductoEntity productoEntity = new ProductoEntity();
 
         setFields(productoEntity);
+        productoEntity.setCreatedAt(Timestamp.valueOf(LocalDateTime.now()));
 
         productoDao.addData(productoEntity);
 
@@ -232,6 +238,7 @@ public class ProductoController {
         ProductoEntity productoEntity = (ProductoEntity) tableViewProductos.getSelectionModel().getSelectedItem();
 
         setFields(productoEntity);
+        productoEntity.setUpdatedAt(Timestamp.valueOf(LocalDateTime.now()));
 
         productoDao.updateData(productoEntity);
 

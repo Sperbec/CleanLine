@@ -15,7 +15,7 @@ public class UsuarioEntity {
     @Column(name = "id_persona")
     private int idPersona;
     @Basic
-    @Column(name = "email")
+    @Column(name = "email") // should be unique
     private String email;
     @Basic
     @Column(name = "email_verified_at")
